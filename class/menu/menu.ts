@@ -16,6 +16,7 @@ export class ItemClass extends M<Item> implements Item {
   title: string;
   description: string;
   price: number;
+  id: string;
 }
 
 export class Menu {

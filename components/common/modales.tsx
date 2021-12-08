@@ -5,7 +5,7 @@ import { BehaviorSubject, firstValueFrom, Subject } from "rxjs";
 type ButtonType = {
   title: string;
   style?: "primary" | "secondary";
-  onClick: Function;
+  onClick: (close: Function) => any;
 };
 
 type ModalType = {
@@ -33,7 +33,7 @@ export default function Modal({
   const Button = (props: ButtonType) => (
     <B
       variant={props.style ? props.style : "primary"}
-      onClick={() => props.onClick}
+      onClick={() => props.onClick(handleClose)}
     >
       {" "}
       {props.title}

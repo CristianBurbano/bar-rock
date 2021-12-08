@@ -2,6 +2,7 @@
  * Plantilla basica
  */
 export interface T {
+  id?: string;
   [key: string]: any;
 }
 

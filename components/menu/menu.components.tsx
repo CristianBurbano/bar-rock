@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
+import Link from "next/link";
+import { Card } from "semantic-ui-react";
 import { categoria, Item, menu } from "../../class/menu/menu";
 import { shoppingCart } from "../../class/menu/shopingCart";
 import { store } from "../../class/storage";
@@ -18,46 +19,56 @@ export default function ItemTypePage(title: string, categoria: categoria) {
     }, []);
 
     return (
-      <main className="container">
+      <main>
         <h3>{title}</h3>
-        <div className="row">
+        <Card.Group>
           {items.map((i) => (
             <ItemCard item={i} key={i.title} />
           ))}
-        </div>
+        </Card.Group>
       </main>
     );
   };
 }
 
 export function ItemCard({ item }: ItemCardType) {
-  const ordenar = () => {
-    shoppingCart.add(item, 1);
-    console.log(store);
-    modales.alert("tu te lo buscaste mi amor XOX");
-  };
   return (
-    <Card key={item.title} className="col-4 m-2">
-      <Card.Body>
+    <Link href={`menu/${item.id}`}>
+      <Card
+        key={item.id}
+        image={item.image}
+        header={item.title}
+        description={item.description}
+        // extra={
+        //   <button
+        //     className="btn btn-primary"
+        //     onClick={(e) => {
+        //       BebidaModal(item);
+        //     }}
+        //   >
+        //     Ordenar
+        //   </button>
+        // }
+      >
+        {/* <Card.Body>
         <Card.Title>{item.title}</Card.Title>
         <Card.Text>
           <p>{item.description}</p>
         </Card.Text>
 
-        <button
-          className="btn btn-primary"
-          onClick={(e) => {
-            BebidaModal();
-          }}
-        >
-          Ordenar
-        </button>
-      </Card.Body>
-    </Card>
+
+      </Card.Body> */}
+      </Card>
+    </Link>
   );
 }
 
-function BebidaModal() {
+function BebidaModal(item: Item) {
+  const ordenar = () => {
+    shoppingCart.add(item, 1);
+    console.log(store);
+    modales.alert("tu te lo buscaste mi amor XOX");
+  };
   let body = (
     <div>
       <h3>Rayos funciono?</h3>
@@ -71,8 +82,9 @@ function BebidaModal() {
     buttons: [
       {
         title: "AÑADIR A LA ORDEN",
-        onClick: () => {
-          alert("se debe añadir a la ordén");
+        onClick: (close) => {
+          ordenar();
+          close();
         },
       },
     ],

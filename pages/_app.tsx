@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "semantic-ui-css/semantic.min.css";
 
 import "bootstrap/dist/css/bootstrap.css";
 // import "jquery";
@@ -13,14 +14,6 @@ import { useEffect } from "react";
 import { Modales, modales } from "../components/common/modales";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    import("jquery").then((jquery) => {
-      console.log("cargo jquery", jquery);
-    });
-    import("bootstrap").then((bootstrap) => {
-      console.log("cargo bootstrap", bootstrap);
-    });
-  }, []);
   return (
     <div>
       <Header />
