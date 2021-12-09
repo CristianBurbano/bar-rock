@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+
+import { Card, Button, Container } from "semantic-ui-react";
 import { categoria, Item, Menu } from "../../class/menu/menu";
 import { ItemCard } from "../../components/menu/menu.components";
 
@@ -39,24 +41,31 @@ export default function menu() {
     [key: string]: string;
   }) => {
     return (
-      <div className="row">
-        <div className="justify-content-between d-flex">
+      <div>
+        <div>
           <h3>{title}</h3>
           <Link href={href}>
-            <a className="btn btn-primary">Ver más</a>
+            <Button as="a" primary>
+              Ver más
+            </Button>
           </Link>{" "}
         </div>
-        <div className="cards row">
-          {menu &&
-            menu
-              .filter((item) => item.categoria === categoria)
-              .map((item) => <ItemCard item={item} />)}
+        <div>
+          {menu && (
+            <Card.Group>
+              {menu
+                .filter((item) => item.categoria === categoria)
+                .map((item) => (
+                  <ItemCard item={item} />
+                ))}
+            </Card.Group>
+          )}
         </div>
       </div>
     );
   };
   return (
-    <main>
+    <Container as="main">
       <h2>MENÚ</h2>
       <div className="container">
         {menu &&
@@ -68,6 +77,6 @@ export default function menu() {
             />
           ))}
       </div>
-    </main>
+    </Container>
   );
 }
